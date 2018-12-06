@@ -16,7 +16,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 # Install basic dependencies
 RUN apt-get update && \
-    apt-get install -y automake gcc libcurl4-openssl-dev make && \
+    apt-get install -y automake gcc libcurl4-openssl-dev make python3 && \
     rm -rf /var/lib/apt/lists/*
 # Copy whole source
 COPY . /cpuminer
@@ -30,4 +30,5 @@ RUN make
 # Install solution
 RUN make install
 # Change entrypoint
-ENTRYPOINT ["./minerd"]
+COPY ./watcoin/bin/docker-cpuminer-entrypoint.sh /docker-cpuminer-entrypoint.sh
+ENTRYPOINT ["/docker-cpuminer-entrypoint.sh"]
