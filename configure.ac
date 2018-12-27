@@ -99,6 +99,8 @@ then
 fi
 
 AC_CHECK_LIB(jansson, json_loads, request_jansson=false, request_jansson=true)
+AC_CHECK_LIB([argon2],      [main],, AC_MSG_ERROR(libargon2 missing))
+
 AC_CHECK_LIB([pthread], [pthread_create], PTHREAD_LIBS="-lpthread",
   AC_CHECK_LIB([pthreadGC2], [pthread_create], PTHREAD_LIBS="-lpthreadGC2",
     AC_CHECK_LIB([pthreadGC1], [pthread_create], PTHREAD_LIBS="-lpthreadGC1",
