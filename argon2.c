@@ -62,7 +62,7 @@ int scanhash_argon2d(int thr_id, uint32_t *pdata, const uint32_t *ptarget,
         memcpy(pwd+76,&n,4);
 
         //hash - zmieniamy
-        argon2i_hash_raw(t_cost, m_cost, parallelism, pwd, pwdlen, salt, SALTLEN, hash8, HASHLEN);
+        argon2d_hash_raw(t_cost, m_cost, parallelism, pwd, pwdlen, salt, SALTLEN, hash8, HASHLEN);
         //sha256d_ms(hash, data, midstate, prehash);
         memcpy(&work_try, hash8 + 28, 4);
         if (swab32(work_try) <= Htarg) {
