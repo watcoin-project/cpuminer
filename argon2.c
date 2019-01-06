@@ -7,7 +7,7 @@
 #include <argon2.h>
 
 #define HASHLEN 32
-#define SALTLEN 0
+#define SALTLEN 16
 
 const uint32_t t_cost = 2;            // 2-pass computation
 const uint32_t m_cost = (1<<18);      // 256 mebibytes memory usage
@@ -17,6 +17,7 @@ const uint32_t pwdlen = 80;
 void hash8_2_hash_swap(uint8_t *hash8, uint32_t *hash)
 {
     memcpy (hash, hash8, 32);
+    //byte order zmieniany do fulltest
     for (int i=0; i < 8; ++i)
     {
        hash[i] = swab32(hash[i]);
@@ -32,7 +33,7 @@ int scanhash_argon2d(int thr_id, uint32_t *pdata, const uint32_t *ptarget,
 
 {
     //later maybe salt should be globalized, and set in main of miner?
-    uint8_t *salt=NULL;//[SALTLEN];
+    uint8_t salt[SALTLEN]={};//[SALTLEN];
    //for (size_t i=0; i<SALTLEN; i++) salt[i]=0;
 
 
