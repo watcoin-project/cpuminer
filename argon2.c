@@ -33,15 +33,11 @@ int scanhash_argon2d(int thr_id, uint32_t *pdata, const uint32_t *ptarget,
 
 {
     //later maybe salt should be globalized, and set in main of miner?
-    uint8_t salt[SALTLEN]={};//[SALTLEN];
-   //for (size_t i=0; i<SALTLEN; i++) salt[i]=0;
-
+    uint8_t salt[SALTLEN] = {'\0'};
 
     uint32_t n = pdata[19] - 1;
     const uint32_t first_nonce = pdata[19];
     const uint32_t Htarg = ptarget[7];
-
-
 
     //Argon bierze parametry uint8_t, natomiast miner używa uint32_t
     uint8_t pwd [4*64] __attribute__((aligned(128)));
@@ -49,11 +45,7 @@ int scanhash_argon2d(int thr_id, uint32_t *pdata, const uint32_t *ptarget,
     uint32_t work_try;
     uint32_t hash [HASHLEN/4];
 
-
     memcpy(pwd, pdata, 80);
-
-
-
 
     do {
         //zwiększanie nonce'a - zmieniamy na 8bit
