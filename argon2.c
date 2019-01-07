@@ -10,7 +10,7 @@
 #define SALTLEN 16
 
 const uint32_t t_cost = 2;            // 2-pass computation
-const uint32_t m_cost = (1<<18);      // 256 mebibytes memory usage
+const uint32_t m_cost = (1 << 10);    // 1 mebibyte memory usage
 const uint32_t parallelism = 2;       // number of threads and lanes
 const uint32_t pwdlen = 80;
 
